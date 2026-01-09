@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>MindSpark | Презентация Проекта</title>
+    <link rel="webdite icon" type="png" href="Screenshot 2026-01-08 at 17.44.46.png">
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;700;800&family=Fira+Code:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      /* 
+        ====================================================================
+        1. DESIGN SYSTEM
+        ====================================================================
+        */
+      :root {
+        --bg-deep: #020617;
+        --bg-surface: #0f172a;
+        --bg-glass: rgba(15, 23, 42, 0.95);
+        --primary: #06b6d4; /* Cyan */
+        --secondary: #8b5cf6; /* Violet */
+        --human: #f59e0b; /* Amber */
+        --danger: #ef4444; /* Red */
+        --success: #10b981; /* Green */
+        --text-white: #f8fafc;
+        --text-muted: #94a3b8;
+        --border-subtle: 1px solid rgba(255, 255, 255, 0.08);
+        --font-head: "Outfit", sans-serif;
+        --font-body: "Inter", sans-serif;
+        --font-mono: "Fira Code", monospace;
+      }
+
+      /* Matrix Mode */
+      body.matrix-mode {
+        --bg-deep: #000000;
+        --bg-surface: #001100;
+        --bg-glass: rgba(0, 20, 0, 0.95);
+        --primary: #00ff00;
+        --secondary: #008f11;
+        --human: #00ff00;
+        --danger: #00ff00;
+        --success: #00ff00;
+        --text-white: #00ff00;
+        --text-muted: #005500;
+        font-family: "Fira Code", monospace !important;
+      }
+      body.matrix-mode * {
+        font-family: "Fira Code", monospace !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        outline: none;
+      }
+      html {
+        scroll-behavior: smooth;
+        font-size: 16px;
+      }
+      body {
+        background-color: var(--bg-deep);
+        color: var(--text-white);
+        font-family: var(--font-body);
+        line-height: 1.6;
+        overflow-x: hidden;
+        transition: all 0.5s ease;
+        background-image: linear-gradient(
+            rgba(255, 255, 255, 0.03) 1px,
+            transparent 1px
+          ),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 50px 50px;
+      }
+
+      /* 
+        ====================================================================
+        2. COMPONENTS & UTILS
+        ====================================================================
+        */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        position: relative;
+      }
+      .section-padding {
+        padding: 100px 0;
+        border-bottom: var(--border-subtle);
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: var(--font-head);
+        font-weight: 700;
+        line-height: 1.1;
+        margin-bottom: 1rem;
+        color: white;
+      }
+      h1 {
+        font-size: 3.5rem;
+      }
+      h2 {
+        font-size: 2.5rem;
+      }
+      p {
+        color: var(--text-muted);
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .text-gradient {
+        background: linear-gradient(135deg, #fff 0%, var(--primary) 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
+      }
+      .text-danger {
+        color: var(--danger);
+        text-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+      }
+
+      /* Glass Cards with Hover Glow */
+      .card {
+        background: var(--bg-surface);
+        border: var(--border-subtle);
+        border-radius: 20px;
+        padding: 30px;
+        transition: 0.3s;
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        border-color: var(--primary);
+        box-shadow: 0 15px 40px -10px rgba(6, 182, 212, 0.15);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: 0.3s;
+        border: none;
+        cursor: pointer;
+        font-family: var(--font-head);
+      }
+      .btn-primary {
+        background: white;
+        color: var(--bg-deep);
+      }
+      .btn-primary:hover {
+        background: var(--primary);
+        color: white;
+        box-shadow: 0 0 25px rgba(6, 182, 212, 0.5);
+      }
+
+      /* Grids */
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+      }
+      .grid-5 {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 15px;
+      }
+
+      /* Animation Classes */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: 0.8s;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .glitch-text {
+        position: relative;
+      }
+      .glitch-text::before {
+        content: attr(data-text);
+        position: absolute;
+        left: 2px;
+        text-shadow: -1px 0 red;
+        top: 0;
+        color: white;
+        background: var(--bg-deep);
+        overflow: hidden;
+        clip: rect(0, 900px, 0, 0);
+        animation: noise-anim 2s infinite linear alternate-reverse;
+      }
+      @keyframes noise-anim {
+        0% {
+          clip: rect(20px, 9999px, 21px, 0);
+        }
+        100% {
+          clip: rect(85px, 9999px, 90px, 0);
+        }
+      }
+
+      /* Mobile Fixes */
+      @media (max-width: 900px) {
+        h1 {
+          font-size: 2.5rem;
+        }
+        h2 {
+          font-size: 2rem;
+        }
+        .grid-2,
+        .grid-3,
+        .grid-5 {
+          grid-template-columns: 1fr;
+        }
+        nav .nav-menu {
+          display: none;
+        }
+        .chart-container {
+          height: 150px;
+        }
+      }
+
+      /* 
+        ====================================================================
+        3. SPECIFIC ELEMENTS
+        ====================================================================
+        */
+      /* Navigation */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 80px;
+        background: var(--bg-glass);
+        backdrop-filter: blur(15px);
+        z-index: 1000;
+        border-bottom: var(--border-subtle);
+      }
+      nav .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+      }
+      .logo {
+        font-family: var(--font-head);
+        font-weight: 800;
+        font-size: 1.5rem;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        color: white;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+      .logo:hover {
+        text-shadow: 0 0 10px var(--primary);
+      }
+      .nav-menu {
+        display: flex;
+        gap: 30px;
+      }
+      .nav-menu a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: 0.3s;
+      }
+      .nav-menu a:hover {
+        color: white;
+      }
+
+      /* Chart */
+      .chart-container {
+        display: flex;
+        align-items: flex-end;
+        height: 250px;
+        gap: 20px;
+        margin-top: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .bar-col {
+        flex: 1;
+        text-align: center;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+      .bar {
+        width: 100%;
+        background: var(--bg-surface);
+        border-radius: 8px 8px 0 0;
+        position: relative;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+        height: 100%;
+      }
+      .bar-fill {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0;
+        border-radius: 8px 8px 0 0;
+        transition: height 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .reveal.visible .bar-fill {
+        height: var(--h);
+      }
+
+      /* Comparison Table */
+      .comp-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      .comp-table th,
+      .comp-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .comp-table th {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+      .comp-table td {
+        color: white;
+        transition: 0.2s;
+      }
+      /* Funny Hover Detail */
+      .hover-reveal:hover::after {
+        content: attr(data-joke);
+        position: absolute;
+        background: #333;
+        padding: 5px 10px;
+        font-size: 0.7rem;
+        border-radius: 5px;
+        top: -10px;
+        left: 20px;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+      .hover-reveal {
+        position: relative;
+        cursor: help;
+        border-bottom: 1px dashed var(--text-muted);
+      }
+
+      /* Secrets UI */
+      #terminal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background: rgba(10, 10, 10, 0.98);
+        z-index: 2000;
+        transition: 0.4s;
+        overflow: hidden;
+        border-bottom: 2px solid var(--primary);
+      }
+      #terminal-overlay.open {
+        height: 100vh;
+      }
+
+      .spark {
+        position: fixed;
+        width: 6px;
+        height: 6px;
+        background: var(--primary);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        animation: spark-fade 0.8s linear forwards;
+        box-shadow: 0 0 10px var(--primary);
+      }
+      @keyframes spark-fade {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(0);
+          opacity: 0;
+        }
+      }
+
+      #toast {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: var(--bg-surface);
+        border: 1px solid var(--primary);
+        color: white;
+        padding: 15px 25px;
+        border-radius: 12px;
+        transform: translateY(200px);
+        transition: 0.4s;
+        z-index: 3000;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      }
+      /* SECRET IMAGE MODAL */
+        #secret-image-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95); z-index: 9999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+        #secret-image-modal.open {
+            opacity: 1; pointer-events: all;
+        }
+        #secret-image-modal img {
+            max-width: 90%; max-height: 80vh;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 50px var(--primary);
+            border-radius: 10px;
+            transform: scale(0.8); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #secret-image-modal.open img {
+            transform: scale(1);
+        }
+    </style>
+  </head>
+  <body>
+    <!-- 1. HEADER / NAVIGATION -->
+    <nav>
+      <div class="container">
+        <a href="#" class="logo" id="logo-trigger">
+          <i class="fas fa-brain" style="color: var(--primary)"></i> MindSpark
+        </a>
+        <div class="nav-menu">
+          <a href="#team">Команда</a>
+          <a href="#problem">Проблема</a>
+          <a href="#solution">Решение</a>
+          <a href="#business">Бизнес</a>
+        </div>
+        <a
+          href="#roadmap"
+          class="btn btn-primary"
+          style="padding: 8px 20px; font-size: 0.8rem"
+          >Roadmap</a
+        >
+      </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section
+      style="
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        padding-top: 80px;
+      "
+    >
+      <div class="container reveal">
+        <!-- MOBILE SECRET: Click badge 3 times -->
+        <div
+          id="matrix-badge"
+          style="
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 30px;
+            margin-bottom: 25px;
+            cursor: pointer;
+            user-select: none;
+            transition: 0.3s;
+          "
+        >
+          <span
+            style="color: var(--primary); font-weight: 700; font-size: 0.8rem"
+            >● SYSTEM ONLINE v3.0</span
+          >
+        </div>
+        <h1>Образование<br /><span class="text-gradient">Новой Эры</span></h1>
+        <p style="max-width: 600px; margin: 0 auto 30px">
+          Протокол, объединяющий Искусственный Интеллект, VR и Человеческий
+          фактор.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 20px">
+          <a href="#problem" class="btn btn-primary">В чем проблема?</a>
+          <a
+            href="#solution"
+            class="btn"
+            style="border: 1px solid rgba(255, 255, 255, 0.2); color: white"
+            >Наше Решение</a
+          >
+        </div>
+
+        <div style="margin-top: 60px; opacity: 0.6">
+          <p style="font-size: 0.8rem; margin-bottom: 15px">
+            Технологии, которые мы используем:
+          </p>
+          <div
+            style="
+              display: flex;
+              justify-content: center;
+              gap: 30px;
+              font-size: 1.5rem;
+            "
+          >
+            <i class="fab fa-js" title="Frontend"></i>
+            <i class="fab fa-github" title="Backend"></i>
+            <i class="fab fa-html5" title="VR/AR"></i>
+            <i class="fab fa-css3-alt" title="Local Core"></i>
+          </div>
+        </div>
+      </div>
+      <div class="ambient-canvas"></div>
+    </section>
+
+    <!-- 2. TEAM SECTION -->
+    <section id="team" class="section-padding">
+      <div class="container reveal">
+        <h2 class="text-center" style="margin-bottom: 10px">Наша Команда</h2>
+        <p class="text-center" style="margin-bottom: 50px">
+          Синтез технологий и креатива.
+        </p>
+        <div class="grid-5">
+          <!-- YOU -->
+          <div
+            class="card"
+            style="
+              border-color: var(--primary);
+              transform: scale(1.05);
+              z-index: 2;
+              text-align: center;
+            "
+          >
+            <div
+              style="
+                width: 60px;
+                height: 60px;
+                background: rgba(6, 182, 212, 0.1);
+                border-radius: 50%;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 15px;
+              "
+            >
+              <i
+                class="fas fa-code"
+                style="font-size: 1.5rem; color: var(--primary)"
+              ></i>
+            </div>
+            <h4 style="font-size: 1rem; margin-bottom: 5px">Тахир (Dev)</h4>
+            <p style="font-size: 0.75rem; color: var(--primary)">
+              Architect & Lead
+            </p>
+            <p style="font-size: 0.7rem; margin: 0">
+              Разработка, Дизайн, Логика.
+            </p>
+          </div>
+          <!-- GIRL 1 -->
+          <div class="card" style="text-align: center">
+            <div
+              style="
+                width: 60px;
+                height: 60px;
+                background: rgba(139, 92, 246, 0.1);
+                border-radius: 50%;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 15px;
+              "
+            >
+              <i
+                class="fas fa-lightbulb"
+                style="font-size: 1.5rem; color: var(--secondary)"
+              ></i>
+            </div>
+            <h4 style="font-size: 1rem; margin-bottom: 5px">Нурсулуу</h4>
+            <p style="font-size: 0.75rem; color: var(--secondary)">Ideator</p>
+            <p style="font-size: 0.7rem; margin: 0">
+              Генерация идей и концепт.
+            </p>
+          </div>
+          <!-- GIRL 2 -->
+          <div class="card" style="text-align: center">
+            <div
+              style="
+                width: 60px;
+                height: 60px;
+                background: rgba(139, 92, 246, 0.1);
+                border-radius: 50%;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 15px;
+              "
+            >
+              <i
+                class="fas fa-chess-queen"
+                style="font-size: 1.5rem; color: var(--secondary)"
+              ></i>
+            </div>
+            <h4 style="font-size: 1rem; margin-bottom: 5px">Даяна</h4>
+            <p style="font-size: 0.75rem; color: var(--secondary)">
+              Strategist
+            </p>
+            <p style="font-size: 0.7rem; margin: 0">Планирование контента.</p>
+          </div>
+          <!-- BOY 1 (Slacker - Secret Tooltip) -->
+          <div
+            class="card"
+            style="text-align: center"
+            title="Status: AFK (Away From Keyboard)"
+          >
+            <div
+              style="
+                width: 60px;
+                height: 60px;
+                background: rgba(148, 163, 184, 0.1);
+                border-radius: 50%;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 15px;
+              "
+            >
+              <i
+                class="fas fa-search"
+                style="font-size: 1.5rem; color: var(--text-muted)"
+              ></i>
+            </div>
+            <h4 style="font-size: 1rem; margin-bottom: 5px">Олег</h4>
+            <p style="font-size: 0.75rem; color: var(--text-muted)">Research</p>
+            <p style="font-size: 0.7rem; margin: 0">Анализ данных.</p>
+          </div>
+          <!-- BOY 2 (Slacker - Secret Tooltip) -->
+          <div
+            class="card"
+            style="text-align: center"
+            title="Status: Connecting to server..."
+          >
+            <div
+              style="
+                width: 60px;
+                height: 60px;
+                background: rgba(148, 163, 184, 0.1);
+                border-radius: 50%;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 15px;
+              "
+            >
+              <i
+                class="fas fa-truck-loading"
+                style="font-size: 1.5rem; color: var(--text-muted)"
+              ></i>
+            </div>
+            <h4 style="font-size: 1rem; margin-bottom: 5px">Бексултан</h4>
+            <p style="font-size: 0.75rem; color: var(--text-muted)">
+              Logistics
+            </p>
+            <p style="font-size: 0.7rem; margin: 0">Тестирование.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PROBLEM & STATS (REWRITTEN & DRAMATIC) -->
+    <section
+      id="problem"
+      class="section-padding"
+      style="background: rgba(255, 255, 255, 0.02)"
+    >
+      <div class="container reveal">
+        <div class="grid-2" style="align-items: center">
+          <div>
+            <h2 class="glitch-text text-danger" data-text="СИСТЕМНЫЙ СБОЙ">
+              СИСТЕМНЫЙ СБОЙ
+            </h2>
+            <p style="font-size: 1.2rem">
+              Современная школа работает на "софте" 19-го века. Результат?
+              Потерянное поколение.
+            </p>
+
+            <div style="margin-top: 30px">
+              <div style="margin-bottom: 25px">
+                <h4 style="color: white; margin-bottom: 5px">
+                  <i
+                    class="fas fa-exclamation-triangle"
+                    style="color: var(--danger)"
+                  ></i>
+                  Ошибка 404: Мотивация
+                </h4>
+                <p style="font-size: 0.95rem; margin: 0">
+                  <strong>85%</strong> учеников скучают. Они выбирают TikTok,
+                  потому что учебники мертвы. Мы теряем их внимание.
+                </p>
+              </div>
+              <div style="margin-bottom: 25px">
+                <h4 style="color: white; margin-bottom: 5px">
+                  <i class="fas fa-file-excel" style="color: var(--danger)"></i>
+                  Бюрократический Ад
+                </h4>
+                <p style="font-size: 0.95rem; margin: 0">
+                  Учитель тратит <strong>40% времени</strong> на бумажки.
+                  Талантливые педагоги выгорают и уходят.
+                </p>
+              </div>
+              <div>
+                <h4 style="color: white; margin-bottom: 5px">
+                  <i
+                    class="fas fa-hourglass-end"
+                    style="color: var(--danger)"
+                  ></i>
+                  Устаревшие Данные
+                </h4>
+                <p style="font-size: 0.95rem; margin: 0">
+                  Цикл обновления учебника — <strong>5 лет</strong>. В мире IT
+                  это вечность. Дети учат историю, а не будущее.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ANIMATED CHART: Added 'reveal' class -->
+          <div class="card reveal" style="border-color: var(--danger)">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              "
+            >
+              <h4>Эффективность Урока</h4>
+              <span
+                style="
+                  font-family: var(--font-mono);
+                  font-size: 0.7rem;
+                  color: var(--danger);
+                "
+                >STATUS: CRITICAL</span
+              >
+            </div>
+            <div class="chart-container">
+              <!-- Bar 1 -->
+              <div class="bar-col">
+                <div class="bar">
+                  <div
+                    class="bar-fill"
+                    style="background: var(--text-muted); --h: 30%"
+                  ></div>
+                </div>
+                <span style="font-size: 0.8rem; margin-top: 10px">Лекция</span>
+              </div>
+              <!-- Bar 2 -->
+              <div class="bar-col">
+                <div class="bar">
+                  <div
+                    class="bar-fill"
+                    style="background: var(--secondary); --h: 50%"
+                  ></div>
+                </div>
+                <span style="font-size: 0.8rem; margin-top: 10px">Видео</span>
+              </div>
+              <!-- Bar 3 -->
+              <div class="bar-col">
+                <div class="bar">
+                  <div
+                    class="bar-fill"
+                    style="
+                      background: var(--primary);
+                      --h: 95%;
+                      box-shadow: 0 0 20px var(--primary);
+                    "
+                  ></div>
+                </div>
+                <span
+                  style="
+                    font-size: 0.8rem;
+                    margin-top: 10px;
+                    color: var(--primary);
+                    font-weight: 700;
+                  "
+                  >MindSpark</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEGACY -->
+    <section class="section-padding">
+      <div class="container reveal">
+        <div class="grid-2" style="align-items: center">
+          <div style="order: 2">
+            <span
+              style="color: var(--human); font-weight: 700; letter-spacing: 2px"
+              >ФУНДАМЕНТ</span
+            >
+            <h2 style="margin-top: 10px">Наследие Мадаминова</h2>
+            <div
+              style="
+                border-left: 4px solid var(--human);
+                padding-left: 20px;
+                margin: 25px 0;
+              "
+            >
+              <p
+                style="
+                  font-style: italic;
+                  color: white;
+                  font-family: 'Playfair Display', serif;
+                  font-size: 1.3rem;
+                "
+              >
+                "Школа не заканчивается у двери класса. Она начинается в сердце
+                матери."
+              </p>
+            </div>
+            <p>
+              В Лейлеке школа <strong>№3</strong> доказала невозможное. Дети
+              чабанов поступают в лучшие ВУЗы мира. Секрет — в вовлечении
+              родителей (Энелер мектеби).
+            </p>
+            <p>
+              MindSpark — это цифровое воплощение этой философии. Мы соединяем
+              школу, ученика и семью в единый организм.
+            </p>
+          </div>
+          <div style="order: 1; text-align: center">
+            <div
+              class="card"
+              style="
+                border-color: var(--human);
+                background: linear-gradient(
+                  135deg,
+                  rgba(245, 158, 11, 0.1),
+                  rgba(0, 0, 0, 0)
+                );
+              "
+            >
+              <i
+                class="fas fa-hands-holding-circle"
+                style="
+                  font-size: 6rem;
+                  color: var(--human);
+                  margin-bottom: 20px;
+                "
+              ></i>
+              <h3>Школа Матерей</h3>
+              <p>Методика УЭР (Умственного Труда)</p>
+              <small
+                style="color: var(--text-muted); cursor: pointer"
+                id="secret-mother-trigger"
+                >Нажми на меня 3 раза</small
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. SOLUTION -->
+    <section
+      id="solution"
+      class="section-padding"
+      style="background: rgba(255, 255, 255, 0.02)"
+    >
+      <div class="container reveal">
+        <h2 class="text-center">Наше Решение</h2>
+        <p class="text-center" style="margin-bottom: 50px">
+          Экосистема, работающая на результат.
+        </p>
+        <div class="grid-3">
+          <div class="card" style="border-top: 4px solid var(--primary)">
+            <i
+              class="fas fa-brain"
+              style="
+                font-size: 2.5rem;
+                color: var(--primary);
+                margin-bottom: 20px;
+              "
+            ></i>
+            <h4>Neural Core (AI)</h4>
+            <p>
+              Персональный ИИ-репетитор. Использует метод Сократа — он не дает
+              ответы, а учит думать и находить решения.
+            </p>
+          </div>
+          <div class="card" style="border-top: 4px solid var(--secondary)">
+            <i
+              class="fas fa-vr-cardboard"
+              style="
+                font-size: 2.5rem;
+                color: var(--secondary);
+                margin-bottom: 20px;
+              "
+            ></i>
+            <h4>Reality Engine (VR)</h4>
+            <p>
+              Виртуальные лаборатории. Безопасная химия, физика двигателей и
+              история. Опыт вместо зубрежки.
+            </p>
+          </div>
+          <div class="card" style="border-top: 4px solid var(--human)">
+            <i
+              class="fas fa-users"
+              style="
+                font-size: 2.5rem;
+                color: var(--human);
+                margin-bottom: 20px;
+              "
+            ></i>
+            <h4>Family Connect</h4>
+            <p>
+              Приложение для родителей. Психологическая поддержка, аналитика
+              талантов и советы по воспитанию.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. TARGET AUDIENCE -->
+    <section id="audience" class="section-padding">
+      <div class="container reveal">
+        <h2 class="text-center" style="margin-bottom: 40px">
+          Целевая Аудитория
+        </h2>
+        <div class="grid-2">
+          <div class="card">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin-bottom: 15px;
+              "
+            >
+              <div
+                style="
+                  width: 50px;
+                  height: 50px;
+                  background: rgba(6, 182, 212, 0.2);
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
+                <i
+                  class="fas fa-user-graduate"
+                  style="font-size: 1.5rem; color: var(--primary)"
+                ></i>
+              </div>
+              <h3 style="margin: 0">B2C (Ученик)</h3>
+            </div>
+            <ul style="list-style: none; padding-left: 5px">
+              <li style="margin-bottom: 10px">
+                🎯 <strong>Кто:</strong> Поколение Z (12-17 лет).
+              </li>
+              <li style="margin-bottom: 10px">
+                🌍 <strong>Гео:</strong> Бишкек, Ош, Регионы.
+              </li>
+              <li style="margin-bottom: 10px">
+                💔 <strong>Боль:</strong> Скука, давление, страх перед ЕРТ.
+              </li>
+              <li>
+                💡 <strong>Желание:</strong> Интерактив, Геймификация, IT.
+              </li>
+            </ul>
+          </div>
+          <div class="card">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin-bottom: 15px;
+              "
+            >
+              <div
+                style="
+                  width: 50px;
+                  height: 50px;
+                  background: rgba(139, 92, 246, 0.2);
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
+                <i
+                  class="fas fa-building"
+                  style="font-size: 1.5rem; color: var(--secondary)"
+                ></i>
+              </div>
+              <h3 style="margin: 0">B2G / B2B (Школа)</h3>
+            </div>
+            <ul style="list-style: none; padding-left: 5px">
+              <li style="margin-bottom: 10px">
+                🎯 <strong>Кто:</strong> Частные школы, Министерство.
+              </li>
+              <li style="margin-bottom: 10px">
+                💔 <strong>Боль:</strong> Низкие рейтинги, текучка кадров,
+                бумажная волокита.
+              </li>
+              <li>
+                💡 <strong>Желание:</strong> Автоматизация, Престиж, Результаты.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. COMPETITORS (FUNNY DETAILS) -->
+    <section
+      class="section-padding"
+      style="background: rgba(255, 255, 255, 0.02)"
+    >
+      <div class="container reveal">
+        <h2 class="text-center">Конкуренты</h2>
+        <div class="card" style="margin-top: 40px; overflow-x: auto">
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th style="width: 25%">Функция</th>
+                <th style="color: var(--danger)">Обычная Школа</th>
+                <th style="color: var(--human)">Онлайн Курсы</th>
+                <th
+                  style="
+                    color: var(--primary);
+                    font-size: 1.1rem;
+                    font-weight: 700;
+                  "
+                >
+                  MindSpark
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+                        <tr>
+                            <td><strong>Фокус</strong></td>
+                            <td>Цифровой Дневник</td> <!-- Kundoluk -->
+                            <td>Видео-уроки</td> <!-- Khan Academy -->
+                            <td style="color: var(--primary);">AI + VR Практика</td> <!-- MindSpark -->
+                        </tr>
+                        <tr>
+                            <td><strong>Технология</strong></td>
+                            <td>Web-сайт</td>
+                            <td>Планшет / Видео</td>
+                            <td style="color: var(--primary);">VR + Local Server</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Роль учителя</strong></td>
+                            <td>Бюрократ (Заполняет)</td>
+                            <td>Наблюдатель</td>
+                            <td style="color: var(--primary);">Ментор (Свободен)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Пример</strong></td>
+                            <td style="color: var(--danger);">Kundoluk / Bilimal</td>
+                            <td style="color: var(--human);">Khan Academy</td>
+                            <td style="color: var(--primary); font-weight: 700;">MindSpark</td>
+                        </tr>
+                    </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. BUSINESS MODEL -->
+    <section id="business" class="section-padding">
+      <div class="container reveal">
+        <h2 class="text-center" style="margin-bottom: 40px">Бизнес-Модель</h2>
+        <div class="grid-2">
+          <div class="card" style="text-align: center">
+            <h3 style="color: var(--secondary)">SaaS Подписка</h3>
+            <div style="font-size: 3.5rem; font-weight: 800; margin: 10px 0">
+              $10<span style="font-size: 1rem; color: var(--text-muted)"
+                >/мес</span
+              >
+            </div>
+            <p style="color: var(--text-white)">
+              Для частных школ (за ученика).
+            </p>
+            <hr
+              style="
+                border: 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                margin: 20px 0;
+              "
+            />
+            <ul style="text-align: left; list-style: none; font-size: 0.9rem">
+              <li style="margin-bottom: 10px">✅ Полный доступ к VR</li>
+              <li style="margin-bottom: 10px">✅ Расширенная аналитика</li>
+              <li>✅ Техподдержка 24/7</li>
+            </ul>
+          </div>
+          <div
+            class="card"
+            style="text-align: center; border-color: var(--success)"
+          >
+            <h3 style="color: var(--success)">Гос. Лицензия</h3>
+            <div style="font-size: 3.5rem; font-weight: 800; margin: 10px 0">
+              Free<span style="font-size: 1rem; color: var(--text-muted)"
+                >/База</span
+              >
+            </div>
+            <p style="color: var(--text-white)">Для государственных школ.</p>
+            <hr
+              style="
+                border: 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                margin: 20px 0;
+              "
+            />
+            <ul style="text-align: left; list-style: none; font-size: 0.9rem">
+              <li style="margin-bottom: 10px">✅ Базовый AI тьютор</li>
+              <li style="margin-bottom: 10px">✅ Автоматизация отчетов</li>
+              <li>💰 Монетизация: Доп. курсы</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. ROADMAP -->
+    <section
+      id="roadmap"
+      class="section-padding"
+      style="background: rgba(255, 255, 255, 0.02)"
+    >
+      <div class="container reveal">
+        <h2 class="text-center" style="margin-bottom: 50px">Планы на 3 года</h2>
+        <div class="grid-3">
+          <div class="card">
+            <div
+              style="
+                position: absolute;
+                right: 20px;
+                top: 10px;
+                font-size: 4rem;
+                font-weight: 800;
+                color: var(--primary);
+                opacity: 0.1;
+              "
+            >
+              01
+            </div>
+            <h4 style="color: var(--primary)">2026: Старт</h4>
+            <p><strong>MVP:</strong> Разработка ядра Neural Core.</p>
+            <p><strong>Пилот:</strong> Запуск в 3 школах Бишкека.</p>
+            <p><strong>Цель:</strong> 1000 активных учеников.</p>
+          </div>
+          <div class="card">
+            <div
+              style="
+                position: absolute;
+                right: 20px;
+                top: 10px;
+                font-size: 4rem;
+                font-weight: 800;
+                color: var(--secondary);
+                opacity: 0.1;
+              "
+            >
+              02
+            </div>
+            <h4 style="color: var(--secondary)">2027: Масштаб</h4>
+            <p><strong>VR:</strong> Внедрение лабораторий.</p>
+            <p><strong>Регионы:</strong> Выход на Ош и Нарын.</p>
+            <p><strong>Цель:</strong> 50 школ-партнеров.</p>
+          </div>
+          <div class="card">
+            <div
+              style="
+                position: absolute;
+                right: 20px;
+                top: 10px;
+                font-size: 4rem;
+                font-weight: 800;
+                color: var(--human);
+                opacity: 0.1;
+              "
+            >
+              03
+            </div>
+            <h4 style="color: var(--human)">2028: Экосистема</h4>
+            <p><strong>Blockchain:</strong> Цифровые аттестаты.</p>
+            <p><strong>Гос:</strong> Интеграция с Министерством.</p>
+            <p><strong>Цель:</strong> Национальный стандарт.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. FOOTER / THANK YOU -->
+    <footer
+      style="
+        padding: 100px 0;
+        background: #000;
+        text-align: center;
+        border-top: 1px solid #333;
+      "
+    >
+      <div class="container reveal">
+        <h2 style="font-size: 3rem; margin-bottom: 20px">
+          Благодарю за внимание!
+        </h2>
+        <p>Готовы ответить на ваши вопросы.</p>
+
+        <div style="margin-top: 50px; opacity: 0.5; font-size: 0.8rem">
+          <span title="Made with ☕ and Panic"
+            >MindSpark Project &copy; 2026</span
+          ><br />
+          Press <strong>`</strong> (Tilde) for Console.
+        </div>
+
+        <!-- Funny Detail: Don't Click Button -->
+        <div
+          id="self-destruct"
+          style="
+            width: 10px;
+            height: 10px;
+            background: #222;
+            border-radius: 50%;
+            margin: 30px auto;
+            cursor: pointer;
+          "
+          title="Do Not Touch"
+        ></div>
+      </div>
+    </footer>
+
+    <!-- TERMINAL OVERLAY -->
+    <div id="terminal-overlay">
+      <div
+        style="
+          width: 80%;
+          max-width: 800px;
+          height: 70%;
+          margin: 50px auto;
+          color: var(--primary);
+          font-family: 'Fira Code';
+          display: flex;
+          flex-direction: column;
+        "
+      >
+        <div
+          id="output"
+          style="flex: 1; overflow-y: auto; white-space: pre-wrap"
+        >
+          MindSpark OS v4.0.2...<br />Enter command (try 'help'):
+        </div>
+        <div
+          style="border-top: 1px solid #333; padding-top: 10px; display: flex"
+        >
+          <span style="margin-right: 10px">root@mindspark:~#</span>
+          <input
+            type="text"
+            id="terminal-input"
+            style="
+              background: transparent;
+              border: none;
+              color: white;
+              width: 100%;
+              font-family: inherit;
+              font-size: 1rem;
+            "
+            autofocus
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast">
+      <i class="fas fa-info-circle"></i
+      ><span id="toast-msg">System Notification</span>
+    </div>
+    <!-- SECRET IMAGE OVERLAY -->
+    <div id="secret-image-modal" onclick="this.classList.remove('open')">
+        <!-- PLACEHOLDER IMAGE: Replace the src below with your own image file later -->
+        <img src="frame.png" alt="Secret" id="secret-img-element">
+        <p style="color: white; margin-top: 10px; font-family: 'Fira Code';">CLASSIFIED MATERIAL (Click to Close)</p>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script>
+      function toggleFullscreen() {
+        if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+          if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+          } else if (document.documentElement.webkitRequestFullscreen) {
+            // Safari/Mac fallback
+            document.documentElement.webkitRequestFullscreen();
+          }
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          }
+        }
+      }
+
+      // Listener: Command + Enter OR Option + Enter
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && (e.metaKey || e.altKey)) {
+          e.preventDefault();
+          toggleFullscreen();
+          showToast("Fullscreen Mode", "fas fa-expand", "#fff");
+        }
+      });
+      /* 1. SCROLL REVEAL ENGINE */
+      const revealElements = document.querySelectorAll(".reveal");
+      const revealOnScroll = () => {
+        const windowHeight = window.innerHeight;
+        revealElements.forEach((reveal) => {
+          const elementTop = reveal.getBoundingClientRect().top;
+          if (elementTop < windowHeight - 50) {
+            reveal.classList.add("visible");
+          }
+        });
+      };
+      window.addEventListener("scroll", revealOnScroll);
+      revealOnScroll();
+
+      /* 2. SPARK CURSOR */
+      const colors = ["#06b6d4", "#8b5cf6", "#f59e0b"];
+      document.addEventListener("mousemove", (e) => {
+        if (Math.random() > 0.5) {
+          const spark = document.createElement("div");
+          spark.className = "spark";
+          spark.style.left = e.clientX + "px";
+          spark.style.top = e.clientY + "px";
+          spark.style.backgroundColor =
+            colors[Math.floor(Math.random() * colors.length)];
+          spark.style.transform = `scale(${Math.random() * 1.5})`;
+          document.body.appendChild(spark);
+          setTimeout(() => spark.remove(), 800);
+        }
+      });
+
+      /* 3. TOAST */
+      function showToast(
+        msg,
+        iconClass = "fas fa-info-circle",
+        color = "var(--primary)"
+      ) {
+        const toast = document.getElementById("toast");
+        const msgSpan = document.getElementById("toast-msg");
+        const icon = toast.querySelector("i");
+        msgSpan.innerText = msg;
+        icon.className = iconClass;
+        icon.style.color = color;
+        toast.style.borderColor = color;
+        toast.style.transform = "translateY(0)";
+        setTimeout(() => {
+          toast.style.transform = "translateY(200px)";
+        }, 3000);
+      }
+
+      /* 4. TERMINAL */
+      const terminal = document.getElementById("terminal-overlay");
+      const input = document.getElementById("terminal-input");
+      const output = document.getElementById("output");
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "`" || e.key === "~") {
+          e.preventDefault();
+          terminal.classList.toggle("open");
+          if (terminal.classList.contains("open")) input.focus();
+        }
+      });
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          const cmd = input.value.trim().toLowerCase();
+          let response = "";
+          output.innerHTML += `\n<span style="color:#fff">root@mindspark:~#</span> ${cmd}`;
+
+          switch (cmd) {
+            case "help":
+              response =
+                "Commands: help, about, hack, madaminov, clear, exit, matrix, team";
+              break;
+            case "about":
+              response = "MindSpark OS v4.0.2.";
+              break;
+            case "hack":
+              response =
+                "<span style='color:var(--danger)'>ACCESS GRANTED.</span> Admin Mode.";
+              showToast("Developer Mode Enabled", "fas fa-code");
+              break;
+            case "madaminov":
+              response =
+                "«Врач может похоронить ошибку. Ошибка учителя ходит по земле вечно.»";
+              break;
+            case "clear":
+              output.innerHTML = "";
+              return;
+            case "exit":
+              terminal.classList.remove("open");
+              return;
+            case "matrix":
+              document.body.classList.toggle("matrix-mode");
+              response = "Matrix Mode: Toggled";
+              break;
+            case "team":
+              response =
+                "Boys status (Oleg, Beksultan): AFK (Sleeping). Girls (and Tahir) status: Working hard.";
+              break;
+            case "fullscreen":
+              toggleFullscreen();
+              response = "Presentation Mode: ON";
+              break;
+            default:
+              response = `Command not found: ${cmd}`;
+          }
+          output.innerHTML += `\n${response}\n`;
+          output.scrollTop = output.scrollHeight;
+          input.value = "";
+        }
+      });
+
+      /* 5. KONAMI */
+      const konami = [
+        "ArrowUp",
+        "ArrowUp",
+        "ArrowDown",
+        "ArrowDown",
+        "ArrowLeft",
+        "ArrowRight",
+        "ArrowLeft",
+        "ArrowRight",
+        "b",
+        "a",
+      ];
+      let kIndex = 0;
+      document.addEventListener("keydown", (e) => {
+        if (e.key === konami[kIndex]) {
+          kIndex++;
+          if (kIndex === konami.length) {
+            document.body.classList.toggle("matrix-mode");
+            showToast("MATRIX MODE: ACTIVATED", "fas fa-terminal", "#00ff00");
+            kIndex = 0;
+          }
+        } else {
+          kIndex = 0;
+        }
+      });
+
+      /* 6. LOGO SECRET */
+      let logoClicks = 0;
+      document.getElementById("logo-trigger").addEventListener("click", (e) => {
+        e.preventDefault();
+        logoClicks++;
+        if (logoClicks === 5) {
+          showToast("Dev Mode: Borders ON", "fas fa-code", "#f43f5e");
+          document.body.style.border = "1px solid var(--primary)";
+          logoClicks = 0;
+        }
+      });
+
+      /* 7. MOBILE SECRET */
+      let badgeClicks = 0;
+      document.getElementById("matrix-badge").addEventListener("click", () => {
+        badgeClicks++;
+        if (badgeClicks === 3) {
+          document.body.classList.toggle("matrix-mode");
+          showToast("Matrix Mode (Mobile)", "fas fa-mobile-alt", "#00ff00");
+          badgeClicks = 0;
+        }
+      });
+
+      /* 8. MOTHER SCHOOL SECRET */
+      let legacyClicks = 0;
+      document
+        .getElementById("secret-mother-trigger")
+        .addEventListener("click", () => {
+          legacyClicks++;
+          if (legacyClicks === 3) {
+            alert(
+              "Мудрость Гор:\n\n'Образование — единственное богатство, которое нельзя украсть.'"
+            );
+            legacyClicks = 0;
+          }
+        });
+
+      /* 9. FUNNY SELF DESTRUCT */
+      document.getElementById("self-destruct").addEventListener("click", () => {
+        document.body.style.animation = "shake 0.5s";
+        document.body.style.backgroundColor = "red";
+        setTimeout(() => {
+          alert("Just Kidding. System Stable.");
+          document.body.style.backgroundColor = "var(--bg-deep)";
+          document.body.style.animation = "none";
+        }, 500);
+      });
+
+      // CSS Injection for Shake
+      const styleSheet = document.createElement("style");
+      styleSheet.innerText = `
+            @keyframes shake { 0% { transform: translate(1px, 1px) rotate(0deg); } 10% { transform: translate(-1px, -2px) rotate(-1deg); } 20% { transform: translate(-3px, 0px) rotate(1deg); } 30% { transform: translate(3px, 2px) rotate(0deg); } 40% { transform: translate(1px, -1px) rotate(1deg); } 50% { transform: translate(-1px, 2px) rotate(-1deg); } 60% { transform: translate(-3px, 1px) rotate(0deg); } 70% { transform: translate(3px, 1px) rotate(-1deg); } 80% { transform: translate(-1px, -1px) rotate(1deg); } 90% { transform: translate(1px, 2px) rotate(0deg); } 100% { transform: translate(1px, -2px) rotate(-1deg); } }
+        `;
+      document.head.appendChild(styleSheet);
+
+      console.log(
+        "%c 🚀 MindSpark Online! ",
+        "background: linear-gradient(90deg, #06b6d4, #3b82f6); color: #fff; padding: 6px 12px; font-weight: bold; border-radius: 4px; font-family: monospace;"
+      );
+      /* 
+        ========================================
+        11. SECRET IMAGE (SHIFT + S)
+        ========================================
+        */
+        document.addEventListener('keydown', (e) => {
+            // Check if SHIFT is held down AND the key is 'S' (or 's')
+            if (e.shiftKey && (e.key === 'S' || e.key === 's')) {
+                const modal = document.getElementById('secret-image-modal');
+                // Toggle the open class
+                if (modal.classList.contains('open')) {
+                    modal.classList.remove('open');
+                } else {
+                    modal.classList.add('open');
+                    showToast("Classified File Opened", "fas fa-file-secret", "#f43f5e");
+                }
+            }
+        });
+    </script>
+  </body>
+</html>
